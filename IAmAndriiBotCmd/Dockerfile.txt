@@ -3,7 +3,7 @@
 WORKDIR /app
 
 COPY *.csproj ./
-RUN dotnet restore C:\Users\malya\source\repos\IAmAndriiBotCmd\IAmAndriiBotCmd\IAmAndriiBotCmd.csproj
+RUN dotnet restore IAmAndriiBotCmd.csproj
 
 COPY . ./
 
