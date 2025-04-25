@@ -7,6 +7,7 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace IAmAndriiBotCmd
 {
@@ -49,7 +50,7 @@ namespace IAmAndriiBotCmd
             Stop();
         }
 
-        public void Stop() 
+        public void Stop()
         {
             Console.ReadKey();
             _cts.Cancel();
@@ -72,7 +73,7 @@ namespace IAmAndriiBotCmd
                     scriptId = 1;
                     textRespose = GetTextResponseScripts(scriptId);
                 }
-                else if (message.Text.StartsWith("/present"))
+                else if (message.Text.StartsWith("/presentation"))
                 {
                     scriptId = 2;
                     textRespose = GetTextResponseScripts(scriptId);
@@ -82,16 +83,23 @@ namespace IAmAndriiBotCmd
                     scriptId = 3;
                     textRespose = GetTextResponseScripts(scriptId);
                 }
+                else if (message.Text.StartsWith("/contacts"))
+                {
+                    scriptId = 4;
+                    textRespose = GetTextResponseScripts(scriptId);
+                }
 
                 try
                 {
-                    await _client.SendMessage(message.Chat.Id, textRespose, parseMode: ParseMode.Markdown);
-                    
-                    Console.WriteLine($"Повідомлення номер \"{scriptId}\" до {message.Chat} надіслано!");
 
-                    if(scriptId == 3) 
+                    if (scriptId == 0 || scriptId == 1 || scriptId == 2)
                     {
-                        var filePath = "C:\\Users\\malya\\source\\repos\\IAmAndriiBotCmd\\IAmAndriiBotCmd\\Content\\CV-Andrii.pdf";
+                        await _client.SendMessage(message.Chat.Id, textRespose, parseMode: ParseMode.Markdown);
+                        Console.WriteLine($"Повідомлення номер \"{scriptId}\" до {message.Chat} надіслано!");
+                    }
+                    else if (scriptId == 3)
+                    {
+                        var filePath = "https://drive.google.com/file/d/1RDIV2OyEotbMCtmOMC0toE5Krwm9cjSq/view?usp=sharing";
 
                         if (File.Exists(filePath))
                         {
@@ -99,6 +107,22 @@ namespace IAmAndriiBotCmd
                             Console.WriteLine($"Файл {filePath} успішно надіслано");
                         }
                         else { Console.WriteLine("Такого файлу не існує."); }
+                    }
+                    else if (scriptId == 4)
+                    {
+
+                       var keyboard = new InlineKeyboardMarkup(new[]
+                       {
+                            new[]
+                            {
+                                InlineKeyboardButton.WithUrl("Мій LinkedIn", "https://www.linkedin.com/in/andrii-khrushch-b2173a354/"),
+                                InlineKeyboardButton.WithUrl("Мій GitHub", "https://github.com/Sparc0ctavo"),
+                                InlineKeyboardButton.WithCallbackData("+393288976830")
+                            },
+                            
+                       });
+
+                        await _client.SendMessage(message.Chat.Id, textRespose, parseMode: ParseMode.Markdown);
                     }
 
                 }
@@ -129,6 +153,10 @@ namespace IAmAndriiBotCmd
             else if (scriptId == 3)
             {
                 return "Завантажую резюме...";
+            }
+            else if (scriptId == 4)
+            {
+                return "Ось мої основні контакти:";
             }
 
             return "Під час обробки відповіді сталася помилка. Перевірте правильність написаної команди.";
