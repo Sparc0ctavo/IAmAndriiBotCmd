@@ -99,13 +99,13 @@ namespace IAmAndriiBotCmd
                     }
                     else if (scriptId == 3)
                     {
-                        var filePath = "https://drive.google.com/file/d/1RDIV2OyEotbMCtmOMC0toE5Krwm9cjSq/view?usp=sharing";
+                        var filePath = "https://sparc0ctavo.github.io/IAmAndriiBotCmd/CV-Andrii.pdf";
 
-                       
+                            await _client.SendMessage(message.Chat.Id, textRespose);
                             await _client.SendDocument(message.Chat.Id, filePath);
                             Console.WriteLine($"Файл {filePath} успішно надіслано");
-                        
-        
+
+                     
                     }
                     else if (scriptId == 4)
                     {
