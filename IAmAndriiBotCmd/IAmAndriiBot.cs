@@ -22,7 +22,7 @@ namespace IAmAndriiBotCmd
         public IAmAndriiBot()
         {
             _isRunning = true;
-            _bot_token = "7126653896:AAEnrMWKPAKaW8hb4Mnjpxjb6RkzsOY5pxM" /*Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN")*/;
+            _bot_token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN");
             _cts = new CancellationTokenSource();
             _client = new TelegramBotClient(_bot_token, cancellationToken: _cts.Token);
 
