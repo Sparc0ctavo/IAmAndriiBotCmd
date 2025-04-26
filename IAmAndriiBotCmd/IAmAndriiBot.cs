@@ -22,7 +22,7 @@ namespace IAmAndriiBotCmd
         public IAmAndriiBot()
         {
             _isRunning = true;
-            _bot_token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN");
+            _bot_token = "7126653896:AAEnrMWKPAKaW8hb4Mnjpxjb6RkzsOY5pxM" /*Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN")*/;
             _cts = new CancellationTokenSource();
             _client = new TelegramBotClient(_bot_token, cancellationToken: _cts.Token);
 
@@ -101,28 +101,26 @@ namespace IAmAndriiBotCmd
                     {
                         var filePath = "https://drive.google.com/file/d/1RDIV2OyEotbMCtmOMC0toE5Krwm9cjSq/view?usp=sharing";
 
-                        if (File.Exists(filePath))
-                        {
+                       
                             await _client.SendDocument(message.Chat.Id, filePath);
                             Console.WriteLine($"Файл {filePath} успішно надіслано");
-                        }
-                        else { Console.WriteLine("Такого файлу не існує."); }
+                        
+        
                     }
                     else if (scriptId == 4)
                     {
 
-                       var keyboard = new InlineKeyboardMarkup(new[]
-                       {
+                        var buttons = new InlineKeyboardMarkup(new[]
+                        {
                             new[]
                             {
-                                InlineKeyboardButton.WithUrl("Мій LinkedIn", "https://www.linkedin.com/in/andrii-khrushch-b2173a354/"),
-                                InlineKeyboardButton.WithUrl("Мій GitHub", "https://github.com/Sparc0ctavo"),
-                                InlineKeyboardButton.WithCallbackData("+393288976830")
-                            },
-                            
-                       });
+                                InlineKeyboardButton.WithUrl("GitHub", "https://github.com/Sparc0ctavo"),
+                                InlineKeyboardButton.WithUrl("LinkedIn", "https://www.linkedin.com/in/andrii-khrushch-b2173a354/"),
+                            }
+                        });
 
-                        await _client.SendMessage(message.Chat.Id, textRespose, parseMode: ParseMode.Markdown);
+
+                        await _client.SendMessage(message.Chat.Id, textRespose, replyMarkup: buttons);
                     }
 
                 }
