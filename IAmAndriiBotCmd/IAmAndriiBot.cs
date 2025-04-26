@@ -46,7 +46,7 @@ namespace IAmAndriiBotCmd
 
             Console.WriteLine($"Бот запущено! Натисніть CTRL+C, щоб завершити роботу.");
 
-            while (_isRunning) { Task.Delay(-1); }
+            while (_isRunning) { Task.Delay(1000); }
             Stop();
         }
 

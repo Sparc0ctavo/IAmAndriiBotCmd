@@ -1,0 +1,19 @@
+# fly.toml app configuration file generated for iamandriibotcmd on 2025-04-26T12:51:09+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'iamandriibotcmd'
+primary_region = 'fra'
+
+[build]
+  dockerfile = 'Dockerfile'
+
+[env]
+  DOTNET_RUNNING_IN_CONTAINER = 'true'
+
+[processes]
+  worker = ''
+
+[[vm]]
+  size = 'shared-cpu-1x'
