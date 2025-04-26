@@ -17,3 +17,4 @@ worker = "dotnet IAmAndriiBotCmd.dll"
 
 [[vm]]
   size = 'shared-cpu-1x'
+  memory = 512
