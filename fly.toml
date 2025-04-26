@@ -13,7 +13,7 @@ primary_region = 'fra'
   DOTNET_RUNNING_IN_CONTAINER = 'true'
 
 [processes]
-  worker = ''
+worker = "dotnet IAmAndriiBotCmd.dll"
 
 [[vm]]
   size = 'shared-cpu-1x'
